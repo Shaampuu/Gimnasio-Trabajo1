@@ -16,6 +16,10 @@ public class Gimnasio {
     private final ArrayList<Cliente> clientes;
     private final ArrayList<Entrenador> entrenadores;
 
+    //metodo de agregar usuario //angelica
+    //metodo de eliminar usuario
+    //metodo de actualizar usuario
+
     // Método para crear una clase
     public void crearClase(String codigoClase, String nombre, LocalDateTime horario, int capacidad, TipoClase tipo, Entrenador entrenador) throws Exception {
         if (codigoClase == null || nombre == null || horario == null || tipo == null || entrenador == null) {
@@ -76,7 +80,7 @@ public class Gimnasio {
             throw new Exception("La clase con código " + codigoClase + " no está disponible.");
         }
         if (clase.getInscritos() >= clase.getCapacidad()) {
-            throw new Exception("No hay plazas disponibles en la clase con código " + codigoClase + ".");
+            throw new Exception("No hay disponibilidad en la clase con código " + codigoClase + ".");
         }
 
         Reserva reserva = new Reserva(clase, cliente, fechaReserva);
@@ -108,8 +112,6 @@ public class Gimnasio {
         return null;
     }
     // Método de cancelación de reserva de clases
-    public void cancelarReserva(String idReserva) throws Exception {
-    }
 
     // Método de registro de entrenamientos (Simón) (Falta implementar)
     // Método de consulta de historial de entrenamientos (Falta implementar)
