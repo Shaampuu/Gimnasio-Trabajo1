@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.10.2</junit.version>
+        <junit.version>5.9.3</junit.version>
     </properties>
 
     <dependencies>
@@ -66,8 +66,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>co.edu.uniquindio.gimnasio/co.edu.uniquindio.gimnasio.HelloApplication
-                            </mainClass>
+                            <mainClass>co.edu.uniquindio.gimnasio.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
