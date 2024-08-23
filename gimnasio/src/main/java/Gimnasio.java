@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
+@AllArgsConstructor
 
 public class Gimnasio {
 
@@ -10,16 +11,7 @@ public class Gimnasio {
     private final ArrayList<Reserva> reservas;
     private final ArrayList<Cliente> clientes;
     private final ArrayList<Entrenador> entrenadores;
-
-
-
-    public Gimnasio(ArrayList<Clase> clases, ArrayList<Reserva> reservas, ArrayList<Cliente> clientes, ArrayList<Entrenador> entrenadores) {
-        this.clases = clases;
-        this.reservas = reservas;
-        this.clientes = clientes;
-        this.entrenadores = entrenadores;
-    }
-
+    
     //metodo de agregar usuario //angelica
     //metodo de eliminar usuario
     //metodo de actualizar usuario
