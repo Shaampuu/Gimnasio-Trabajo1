@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public class Gimnasio {
 
-    private final Clase[][] clases;
+    private final ArrayList<Clase> clases;
     private final ArrayList<Reserva> reservas;
     private final ArrayList<Cliente> clientes;
     private final ArrayList<Entrenador> entrenadores;
 
 
 
-    public Gimnasio(Clase[][] clases, ArrayList<Reserva> reservas, ArrayList<Cliente> clientes, ArrayList<Entrenador> entrenadores) {
+    public Gimnasio(ArrayList<Clase> clases, ArrayList<Reserva> reservas, ArrayList<Cliente> clientes, ArrayList<Entrenador> entrenadores) {
         this.clases = clases;
         this.reservas = reservas;
         this.clientes = clientes;
