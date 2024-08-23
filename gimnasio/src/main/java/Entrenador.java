@@ -10,4 +10,8 @@ public class Entrenador extends Usuario{
     public Entrenador(String nombre, String identificacion) {
         super(nombre, identificacion);
     }
+
+    public String getCedula() {
+        return null;
+    }
 }

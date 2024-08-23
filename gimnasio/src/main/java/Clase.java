@@ -2,54 +2,44 @@ import enums.TipoClase;
 import java.time.LocalDateTime;
 import lombok.*;
 
-@AllArgsConstructor
 @Getter
 @Setter
 @Builder
 @ToString
-
 public class Clase {
 
     // Atributos
-    private String Id;
+    private String codigoClase;
     private String nombre;
-    private LocalDateTime horario; //List<String>
+    private LocalDateTime horario;
     private int capacidad;
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFin;
-    private boolean estado;
+    // Métodos adicionales
+    @Setter
+    @Getter
+    private boolean disponible; // Corregido el nombre del atributo para que coincida con el método isDisponible()
     private TipoClase tipoClase;
     private Entrenador entrenador;
-    //disponible boolean
-    //inscritos
+    @Setter
+    @Getter
+    private int inscritos;
 
-    public Clase(String id, String nombre, LocalDateTime horario, int capacidad,LocalDateTime fechaInicio, LocalDateTime fechaFin, boolean estado, TipoClase TIPOCLASE, Entrenador ENTRENADOR){
-        this.Id = id;
+    // Constructor sin los parámetros opcionales
+    public Clase(String codigoClase, String nombre, LocalDateTime horario, int capacidad, TipoClase tipoClase, Entrenador entrenador) {
+        this.codigoClase = codigoClase;
         this.nombre = nombre;
         this.horario = horario;
         this.capacidad = capacidad;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.estado = estado;
-        this.tipoClase = TIPOCLASE;
-        this.entrenador = ENTRENADOR;
+        this.tipoClase = tipoClase;
+        this.entrenador = entrenador;
+        this.fechaInicio = null; // Valor predeterminado si no se pasa
+        this.fechaFin = null; // Valor predeterminado si no se pasa
+        this.disponible = true; // Inicializamos la clase como disponible
+        this.inscritos = 0; // Inicializamos inscritos en 0
     }
 
-    public boolean reservarClase(){
-        if(capacidad > 0){
-            capacidad--;
-            return true;
-        }
-        return false;
+    public Object getcodigoClase() {
+        return null;
     }
-
-    public void cancalarReserva(){
-        capacidad++;
-    }
-
-    public String getId() {
-        return Id;
-    }
-    public void setId(String id) {}
-    
 }

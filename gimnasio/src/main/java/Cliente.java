@@ -3,6 +3,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Arrays;
+
 
 @Getter
 @Setter
@@ -11,4 +13,9 @@ import lombok.Setter;
 public class Cliente extends Usuario{
 
     private String  direccion, correo, contrasena;
+
+
+    public Arrays getHistorialEntrenamientos() {
+        return null;
+    }
 }

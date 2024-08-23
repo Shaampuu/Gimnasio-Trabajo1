@@ -14,4 +14,7 @@ public class Entrenamiento {
     private LocalDateTime fecha;
     private int caloriasQuemadas;
 
+    public Object getTipoEjercicio() {
+        return null;
+    }
 }
