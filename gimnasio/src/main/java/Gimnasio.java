@@ -28,7 +28,7 @@ public class Gimnasio {
 
         // Verificar si la clase ya existe con el mismo código
         for (Clase claseExistente : clases) {
-            if (claseExistente.getcodigoClase().equals(codigoClase)) {
+            if (claseExistente.getCodigoClase().equals(codigoClase)) { // Aquí se usa getCodigoClase()
                 throw new Exception("Ya existe una clase con el código " + codigoClase + ".");
             }
         }
@@ -52,7 +52,6 @@ public class Gimnasio {
         // Agregar la nueva clase a la lista de clases del gimnasio
         clases.add(nuevaClase);
     }
-
 
     // Método de búsqueda de clases (Juanita)
     public List<Clase> buscarClases(TipoClase tipo, String nombreInstructor, LocalDateTime horario) {
@@ -119,12 +118,13 @@ public class Gimnasio {
 
     private Clase buscarClasePorCodigo(String codigoClase) {
         for (Clase clase : clases) {
-            if (clase.getcodigoClase().equals(codigoClase)) {
+            if (clase.getCodigoClase().equals(codigoClase)) { // Aquí usamos getCodigoClase()
                 return clase;
             }
         }
         return null;
     }
+
 
     // Método de cancelación de reserva de clases
     public void cancelarReserva(String idReserva) throws Exception {
