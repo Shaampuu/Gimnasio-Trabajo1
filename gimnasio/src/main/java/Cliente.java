@@ -3,12 +3,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+
 @Getter
 @Setter
 @Builder
 
-public class Cliente {
+public class Cliente extends Usuario{
 
-    private String cedula, nombre, direccion, correo, contrasena;
+    private String  direccion, correo, contrasena;
 }

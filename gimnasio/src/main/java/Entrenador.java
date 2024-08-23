@@ -3,7 +3,11 @@ import lombok.*;
 @Getter
 @Setter
 
-public class Entrenador {
+public class Entrenador extends Usuario{
 
-    private String nombre , cedula, especialidad;
+    private String especialidad;
+
+    public Entrenador(String nombre, String identificacion) {
+        super(nombre, identificacion);
+    }
 }
