@@ -1,4 +1,3 @@
-import enums.EstadoClase;
 import enums.TipoClase;
 import java.time.LocalDateTime;
 import lombok.*;
