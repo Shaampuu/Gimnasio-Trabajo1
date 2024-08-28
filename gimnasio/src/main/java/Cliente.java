@@ -17,4 +17,10 @@ public class Cliente extends Usuario{
     public Arrays getHistorialEntrenamientos() {
         return null;
     }
+
+    public boolean estaInscritoEn(Clase clase) {
+    }
+
+    public int caloriasTotalesQuemadas() {
+    }
 }

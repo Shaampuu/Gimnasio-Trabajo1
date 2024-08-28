@@ -1,4 +1,5 @@
 import enums.TipoClase;
+import enums.TipoEjercicio;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -114,8 +115,91 @@ public class Gimnasio {
     // Método de cancelación de reserva de clases
 
     // Método de registro de entrenamientos (Simón) (Falta implementar)
-    // Método de consulta de historial de entrenamientos (Falta implementar)
-    // Método de generación de reportes (Falta implementar)
-    // Método de consulta de disponibilidad de una clase (Falta implementar)
+    public void registrarEntrenamiento(String identificacionCliente, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora, int idSesion) throws Exception {
+        if (identificacionCliente == null || tipoEjercicio == null || fechaHora == null || idSesion < 0) {
+            throw new Exception("Datos del entrenamiento no pueden ser nulos");
+        }
 
-}
+        Cliente cliente = buscarClientePorIdentificacion(identificacionCliente);
+        if (cliente == null) {
+            throw new Exception("Cliente con cedula" + identificacionCliente + " no se encontro al usuario");
+        }
+
+        Entrenamiento nuevoEntrenamiento = new Entrenamiento(idSesion, tipoEjercicio, duracion, caloriasQuemadas, fechaHora);
+
+        cliente.getHistorialEntrenamientos().add(nuevoEntrenamiento);
+
+        System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacionCliente);
+
+    }
+    // Método de consulta de historial de entrenamientos (Falta implementar)
+    private Cliente buscarClientePorCedula(String cedula) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCedula().equals(cedula)){
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+
+    // Método de generación de reportes (Falta implementar)
+    public Clase obtenerClaseMasPopular() {
+        if (clases.isEmpty()) {
+            return null;
+        }
+
+        Clase claseMasPopular = null;
+        int maxInscritos = -1;
+
+        for (Clase clase : clases) {
+            int numInscritos = 0;
+            for (Cliente cliente : clientes) {
+                if (cliente.estaInscritoEn(clase)) {
+                    numInscritos++;
+                }
+            }
+
+            if (numInscritos > maxInscritos) {
+                maxInscritos = numInscritos;
+                claseMasPopular = clase;
+            }
+        }
+
+        return claseMasPopular;
+    }
+
+    public List<Cliente> obtenerTopTresUsuariosMasActivos() {
+        Cliente primero = null;
+        Cliente segundo = null;
+        Cliente tercero = null;
+
+        for (Cliente cliente : clientes) {
+            int caloriasQuemadas = cliente.caloriasTotalesQuemadas();
+
+            if (primero == null || caloriasQuemadas > primero.caloriasTotalesQuemadas()) {
+                tercero = segundo;
+                segundo = primero;
+                primero = cliente;
+            } else if (segundo == null || caloriasQuemadas > segundo.caloriasTotalesQuemadas()) {
+                tercero = segundo;
+                segundo = cliente;
+            } else if (tercero == null || caloriasQuemadas > tercero.caloriasTotalesQuemadas()) {
+                tercero = cliente;
+            }
+        }
+
+        List<Cliente> topTres = new ArrayList<>();
+        if (primero != null) topTres.add(primero);
+        if (segundo != null) topTres.add(segundo);
+        if (tercero != null) topTres.add(tercero);
+
+        return topTres;
+    }
+
+    // Reporte 3: Tipo de ejercicio más practicado (el que más tiempo tiene registrado)
+    public TipoEjercicio obtenerTipoEjercicioMasPracticado() {
+        if (clientes.isEmpty()) {
+            return null;
+        }
+    // Método de consulta de disponibilidad de una clase (Falta implementar)

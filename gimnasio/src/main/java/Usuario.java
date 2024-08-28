@@ -10,4 +10,7 @@ public class Usuario {
 
     private String nombre, identificacion;
 
+    public Object getCedula() {
+        return null;
+    }
 }
