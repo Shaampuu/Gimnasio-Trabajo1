@@ -15,15 +15,15 @@ public class Entrenamiento {
     private int caloriasQuemadas;
     private  int idSesion;
 
-    public Entrenamiento(int idSesion, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora){
+    public Entrenamiento(int idSesion, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora) {
 
         this.idSesion = (idSesion);
         this.tipoEjercicio = tipoEjercicio;
         this.duracion = duracion;
         this.caloriasQuemadas = caloriasQuemadas;
         this.fecha = fechaHora;
-
-    public Object getTipoEjercicio() {
-        return null;
-    }
-}
+    }}
+// public Object getTipoEjercicio() {
+//        return null;
+//    }
+//}

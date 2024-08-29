@@ -3,6 +3,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 @Getter
@@ -14,13 +15,15 @@ public class Cliente extends Usuario{
     private String  direccion, correo, contrasena;
 
 
-    public Arrays getHistorialEntrenamientos() {
+    public List getHistorialEntrenamientos() {
         return null;
     }
 
     public boolean estaInscritoEn(Clase clase) {
+        return false;
     }
 
     public int caloriasTotalesQuemadas() {
+        return 0;
     }
 }

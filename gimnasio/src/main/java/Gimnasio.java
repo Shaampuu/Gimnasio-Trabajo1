@@ -114,7 +114,8 @@ public class Gimnasio {
     }
     // Método de cancelación de reserva de clases
 
-    // Método de registro de entrenamientos (Simón) (Falta implementar)
+
+    // Método de registro de entrenamientos (Simón)
     public void registrarEntrenamiento(String identificacionCliente, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora, int idSesion) throws Exception {
         if (identificacionCliente == null || tipoEjercicio == null || fechaHora == null || idSesion < 0) {
             throw new Exception("Datos del entrenamiento no pueden ser nulos");
@@ -132,10 +133,11 @@ public class Gimnasio {
         System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacionCliente);
 
     }
-    // Método de consulta de historial de entrenamientos (Falta implementar)
+
+    // Método de consulta de historial de entrenamientos
     private Cliente buscarClientePorCedula(String cedula) {
         for (Cliente cliente : clientes) {
-            if (cliente.getCedula().equals(cedula)){
+            if (cliente.getCedula().equals(cedula)) {
                 return cliente;
             }
         }
@@ -143,7 +145,7 @@ public class Gimnasio {
     }
 
 
-    // Método de generación de reportes (Falta implementar)
+    // Método de generación de reportes
     public Clase obtenerClaseMasPopular() {
         if (clases.isEmpty()) {
             return null;
@@ -202,4 +204,7 @@ public class Gimnasio {
         if (clientes.isEmpty()) {
             return null;
         }
+        return null;
+    }
+    }
     // Método de consulta de disponibilidad de una clase (Falta implementar)

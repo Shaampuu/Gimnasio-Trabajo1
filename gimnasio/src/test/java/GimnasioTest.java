@@ -46,7 +46,7 @@ class GimnasioTest {
     @Test
     void testReservarClase() throws Exception {
         Entrenador entrenador = new Entrenador("123", "Juan");
-        Cliente cliente = new Cliente("456", "Ana");
+        Cliente cliente = new Cliente("456", "Ana", "123");
         entrenadores.add(entrenador);
         clientes.add(cliente);
         gimnasio.crearClase("C001", "Yoga", LocalDateTime.now(), 20, TipoClase.YOGA, entrenador);
