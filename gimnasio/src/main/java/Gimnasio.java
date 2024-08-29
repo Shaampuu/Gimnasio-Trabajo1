@@ -243,18 +243,7 @@ public class Gimnasio {
         System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacionCliente);
 
     }
-
-    // Método de consulta de historial de entrenamientos
-    private Cliente buscarClientePorCedula(String identificacion) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getIdentificacion().equals(identificacion)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-
+    
     // Método de generación de reportes
     public Clase obtenerClaseMasPopular() {
         if (clases.isEmpty()) {
