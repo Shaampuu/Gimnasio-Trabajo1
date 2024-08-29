@@ -100,8 +100,8 @@ public class Gimnasio {
         }
 
         // Verificar si el entrenador tiene una cédula válida
-        String cedulaEntrenador = entrenador.getIdentificacion();
-        if (cedulaEntrenador == null) {
+        String identificacion = entrenador.getIdentificacion();
+        if (identificacion == null) {
             throw new Exception("El entrenador debe tener una cédula válida.");
         }
 
@@ -115,14 +115,14 @@ public class Gimnasio {
         // Verificar si el entrenador está registrado en el gimnasio
         boolean entrenadorRegistrado = false;
         for (Entrenador entrenadorExistente : entrenadores) {
-            if (cedulaEntrenador.equals(entrenadorExistente.getCedula())) {
+            if (identificacion.equals(entrenadorExistente.getCedula())) {
                 entrenadorRegistrado = true;
                 break;
             }
         }
 
         if (!entrenadorRegistrado) {
-            throw new Exception("El entrenador con cédula " + cedulaEntrenador + " no está registrado en el gimnasio.");
+            throw new Exception("El entrenador con cédula " + identificacion + " no está registrado en el gimnasio.");
         }
 
         Clase nuevaClase = new Clase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
@@ -243,7 +243,7 @@ public class Gimnasio {
         System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacionCliente);
 
     }
-    
+
     // Método de generación de reportes
     public Clase obtenerClaseMasPopular() {
         if (clases.isEmpty()) {
