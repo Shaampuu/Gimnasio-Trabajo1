@@ -1,8 +1,14 @@
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import enums.TipoEjercicio;
 
 public class Reporte {
+    private Gimnasio gimnasio;
 
+    public Reporte(Gimnasio gimnasio) {
+        this.gimnasio = gimnasio;
+    }
 
+    public TipoEjercicio obtenerTipoEjercicioMasPracticado() {
+        // Implementa la lógica para determinar el tipo de ejercicio más practicado
+        return null;
+    }
 }

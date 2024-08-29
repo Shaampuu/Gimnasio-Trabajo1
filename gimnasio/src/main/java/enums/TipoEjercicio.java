@@ -1,5 +1,5 @@
 package enums;
 
 public enum TipoEjercicio {
-    MANCUERNAS, POLEAS, DISCOS, OTROS
+    MANCUERNAS, POLEAS, DISCOS, CARDIO, OTROS
 }

@@ -11,7 +11,7 @@ public class Entrenador extends Usuario{
         super(nombre, identificacion);
     }
 
-    public String getCedula() {
+    public String getIdentificacion() {
         return null;
     }
 }

@@ -10,10 +10,10 @@ public class Entrenamiento {
 
     private TipoEjercicio tipoEjercicio;
     private int duracion;
-    private  String numeroSesion;
+    private String numeroSesion;
     private LocalDateTime fecha;
     private int caloriasQuemadas;
-    private  int idSesion;
+    private int idSesion;
 
     public Entrenamiento(int idSesion, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora) {
 
@@ -22,8 +22,5 @@ public class Entrenamiento {
         this.duracion = duracion;
         this.caloriasQuemadas = caloriasQuemadas;
         this.fecha = fechaHora;
-    }}
-// public Object getTipoEjercicio() {
-//        return null;
-//    }
-//}
+    }
+}
