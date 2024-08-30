@@ -35,4 +35,6 @@ public class Cliente extends  Usuario{
         // Implementar la lógica para verificar si el cliente está inscrito en la clase
         return false;
     }
+
+
 }
