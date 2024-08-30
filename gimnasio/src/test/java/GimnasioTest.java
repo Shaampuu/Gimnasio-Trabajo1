@@ -488,15 +488,6 @@ class GimnasioTest {
     }
 
     @Test
-    void testConsultarDisponibilidadCodigoNulo() {
-        Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.consultarDisponibilidadClase(null);
-        });
-
-        assertEquals("El código de la clase no puede ser nulo.", exception.getMessage());
-    }
-
-    @Test
 void testRegistrarEntrenamientoConDatosValidos() {
     // Datos de entrada
     String identificacion = "123";
@@ -599,6 +590,11 @@ void testObtenerTipoEjercicioMasPracticadoListaVacia() {
 }
 
 @Test
-void consultarDisponibilidadClase() {
-}
+void testConsultarDisponibilidadCodigoNulo() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            gimnasio.consultarDisponibilidadClase(null);
+        });
+
+        assertEquals("El código de la clase no puede ser nulo.", exception.getMessage());
+    }
 }
