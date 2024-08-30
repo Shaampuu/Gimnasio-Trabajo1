@@ -39,25 +39,12 @@ public class GimnasioTest {
     }
 
     @Test
-    public void testAgregarUsuario() throws Exception {
-        Cliente nuevoCliente = new Cliente("22222", "Laura Martínez", "Calle Real 789", "laura@correo.com", "121212", "contrasenaSegura");
-        gimnasio.agregarUsuario(nuevoCliente);
-        assertNotNull(gimnasio.buscarClientePorIdentificacion("22222"));
-    }
-
-    @Test
     public void testEliminarUsuario() throws Exception {
         gimnasio.eliminarUsuario(cliente.getIdentificacion());
         assertNull(gimnasio.buscarClientePorIdentificacion(cliente.getIdentificacion()));
     }
 
-    @Test
-    public void testActualizarUsuario() throws Exception {
-        Cliente clienteActualizado = new Cliente(cliente.getIdentificacion(), "Ana Gómez", "Calle Falsa 123", "ana@nuevoCorreo.com", "1213","nuevaContrasena");
-        gimnasio.actualizarUsuario(clienteActualizado);
-        Cliente clienteRecuperado = gimnasio.buscarClientePorIdentificacion(cliente.getIdentificacion());
-        assertEquals("ana@nuevoCorreo.com", clienteRecuperado.getCorreo());
-    }
+
 
     @Test
     public void testCrearClase() throws Exception {

@@ -13,7 +13,7 @@ public class Cliente extends  Usuario{
     private String contrasena;
     private List<Entrenamiento> historialEntrenamientos;
 
-    public Cliente(String identificacion, String nombre, String direccion, String correo, String telefono, String contrasena) {
+    public Cliente( String nombre, String direccion, String identificacion, String correo, String telefono, String contrasena) throws Exception{
         super(nombre, identificacion);
         this.direccion = direccion;
         this.correo = correo;

@@ -25,7 +25,7 @@ public class Gimnasio {
         }
         usuarios.add(usuario);
     }
-    public Usuario crearCliente(String nombre, String identificacion, String direccion, String password, String correo, String telefono) throws  Exception {
+    public Usuario crearCliente(String nombre, String identificacion, String direccion, String contrasena, String telefono, String correo) throws  Exception {
 
         if (nombre == null || nombre.isBlank()) {
             throw new Exception("El nombre es obligatorio");
@@ -39,18 +39,18 @@ public class Gimnasio {
             throw new Exception("La dirección es obligatoria");
         }
 
-        if (password == null || password.isBlank()) {
+        if (contrasena == null || contrasena.isBlank()) {
             throw new Exception("La contraseña es obligatoria");
-        }
-
-        if (correo == null || correo.isBlank()) {
-            throw new Exception("El correo es obligatorio");
         }
 
         if (telefono == null || telefono.isBlank()) {
             throw new Exception("El teléfono es obligatorio");
         }
-        return new Cliente(nombre,identificacion, direccion, password, telefono,correo);
+        if (correo == null || correo.isBlank()) {
+            throw new Exception("El correo es obligatorio");
+        }
+
+        return new Cliente(nombre,identificacion, direccion, contrasena, telefono, correo);
     }
     public Usuario crearEntrenador(String nombre, String identificacion, String especialidad) throws Exception{
 
