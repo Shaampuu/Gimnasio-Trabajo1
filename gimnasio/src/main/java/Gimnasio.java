@@ -25,7 +25,7 @@ public class Gimnasio {
         }
         usuarios.add(usuario);
     }
-    public Usuario crearCliente(String nombre, String identificacion, String direccion, String contrasena, String telefono, String correo) throws  Exception {
+    public Cliente crearCliente(String nombre, String identificacion, String direccion, String contrasena, String telefono, String correo) throws Exception {
 
         if (nombre == null || nombre.isBlank()) {
             throw new Exception("El nombre es obligatorio");
@@ -46,12 +46,16 @@ public class Gimnasio {
         if (telefono == null || telefono.isBlank()) {
             throw new Exception("El teléfono es obligatorio");
         }
+
         if (correo == null || correo.isBlank()) {
             throw new Exception("El correo es obligatorio");
         }
 
-        return new Cliente(nombre,identificacion, direccion, contrasena, telefono, correo);
+        Cliente cliente = new Cliente(nombre, identificacion, direccion, contrasena, telefono, correo);
+        clientes.add(cliente);  // Asegúrate de que `clientes` es una lista accesible en esta clase.
+        return cliente;
     }
+
     public Usuario crearEntrenador(String nombre, String identificacion, String especialidad) throws Exception{
 
         if (nombre == null || nombre.isBlank()) {
@@ -103,7 +107,7 @@ public class Gimnasio {
         }
     }
 
-    private Usuario obtenerUsuario(String numeroIdentificacion){
+    Usuario obtenerUsuario(String numeroIdentificacion){
         for(int i = 0; i < usuarios.size(); i++){
             if(usuarios.get(i).getIdentificacion().equals(numeroIdentificacion)){
                 return usuarios.get(i);
