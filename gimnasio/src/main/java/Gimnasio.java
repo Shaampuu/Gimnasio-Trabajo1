@@ -76,7 +76,7 @@ public class Gimnasio {
 
     //método de actualizar usuario
 
-    public void actualizarUsuario(String nombre, String direccion, String identificacion, String correoElectronico, String contrasena) throws Exception{
+    public void actualizarUsuario(String nombre, String direccion, String identificacion, String correo, String contrasena) throws Exception{
 
         if(nombre == null || nombre.isBlank()){
             throw new Exception("El nombre es obligatorio");
@@ -86,7 +86,7 @@ public class Gimnasio {
             throw new Exception("La dirección es obligatoria");
         }
 
-        if(correoElectronico == null || correoElectronico.isBlank()){
+        if(correo == null || correo.isBlank()){
             throw new Exception("El correo electronico es obligatorio");
         }
 
@@ -231,6 +231,7 @@ public class Gimnasio {
         }
         return null;
     }
+
     // Método de cancelación de reserva de clases
 
     public void cancelarReserva(String codigoClase, String identificacion, LocalDate fechaReserva) throws Exception {
