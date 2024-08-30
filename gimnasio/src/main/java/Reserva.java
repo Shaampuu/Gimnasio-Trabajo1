@@ -13,6 +13,6 @@ public class Reserva {
     public Reserva(Clase clase, Cliente cliente, LocalDateTime fechaReserva) {
         this.clase = clase;
         this.cliente = cliente;
-        this.fechaReserva = fechaReserva.atStartOfDay();
+        this.fechaReserva = fechaReserva;
     }
 }

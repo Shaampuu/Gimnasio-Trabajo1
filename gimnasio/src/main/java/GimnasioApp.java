@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class GimnasioApp {
 
     public static void main(String[] args) {
         try {

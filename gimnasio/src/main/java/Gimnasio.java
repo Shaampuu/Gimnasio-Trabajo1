@@ -203,7 +203,7 @@ public class Gimnasio {
             throw new Exception("No hay disponibilidad en la clase con código " + codigoClase + ".");
         }
 
-        Reserva reserva = new Reserva(clase, cliente, fechaReserva);
+        Reserva reserva = new Reserva(clase, cliente, fechaReserva.atStartOfDay());
         reservas.add(reserva);
 
         clase.setInscritos(clase.getInscritos() + 1);
