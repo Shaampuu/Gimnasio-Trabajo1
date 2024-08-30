@@ -17,7 +17,80 @@ public class Gimnasio {
     private final ArrayList<Cliente> clientes;
     private final ArrayList<Entrenador> entrenadores;
 
-    
+    // crear usuario
+    public void crearUsuario(String identificacion, String nombre, String direccion, String correoElectronico, String contrasena) throws Exception {
+        if (identificacion == null || nombre == null || direccion == null || correoElectronico == null || contrasena == null) {
+            throw new Exception("Todos los campos son obligatorios para crear un usuario.");
+        }
+
+        // Verificar que no exista un cliente con la misma identificación
+        for (Cliente clienteExistente : clientes) {
+            if (clienteExistente.getIdentificacion().equals(identificacion)) {
+                throw new Exception("Ya existe un cliente con la identificación " + identificacion + ".");
+            }
+        }
+
+        // Crear un nuevo cliente
+        Cliente nuevoCliente = new Cliente(identificacion, nombre, direccion, correoElectronico, contrasena);
+        clientes.add(nuevoCliente);
+    }
+
+
+    //metodo de agregar usuario //angelica
+
+    public void agregarUsuario(Cliente nuevoCliente) throws Exception {
+        if (nuevoCliente == null || nuevoCliente.getIdentificacion() == null) {
+            throw new Exception("El cliente y su identificación no pueden ser nulos.");
+        }
+
+        for (Cliente clienteExistente : clientes) {
+            if (clienteExistente.getIdentificacion().equals(nuevoCliente.getIdentificacion())) {
+                throw new Exception("Ya existe un cliente con la identificación " + nuevoCliente.getIdentificacion() + ".");
+            }
+        }
+
+        clientes.add(nuevoCliente);
+    }
+
+    //metodo de eliminar usuario
+
+    public void eliminarUsuario(String identificacionCliente) throws Exception {
+        if (identificacionCliente == null) {
+            throw new Exception("La identificación del cliente no puede ser nula.");
+        }
+
+        Cliente clienteAEliminar = buscarClientePorIdentificacion(identificacionCliente);
+
+        if (clienteAEliminar == null) {
+            throw new Exception("No se encontró un cliente con la identificación " + identificacionCliente + ".");
+        }
+
+        // Eliminar reservas asociadas al cliente
+        reservas.removeIf(reserva -> reserva.getCliente().getIdentificacion().equals(identificacionCliente));
+
+        clientes.remove(clienteAEliminar);
+    }
+
+    //metodo de actualizar usuario
+
+    public void actualizarUsuario(Cliente clienteActualizado) throws Exception {
+        if (clienteActualizado == null || clienteActualizado.getIdentificacion() == null) {
+            throw new Exception("El cliente actualizado y su identificación no pueden ser nulos.");
+        }
+
+        Cliente clienteExistente = buscarClientePorIdentificacion(clienteActualizado.getIdentificacion());
+
+        if (clienteExistente == null) {
+            throw new Exception("No se encontró un cliente con la identificación " + clienteActualizado.getIdentificacion() + ".");
+        }
+
+        // Actualizar los datos del cliente existente
+        clienteExistente.setNombre(clienteActualizado.getNombre());
+        clienteExistente.setDireccion(clienteActualizado.getDireccion());
+        clienteExistente.setCorreo(clienteActualizado.getCorreo());
+        clienteExistente.setContrasena(clienteActualizado.getContrasena());
+        // Puedes agregar aquí cualquier otro campo que desees actualizar
+    }
 
 
     // Método para crear una clase
