@@ -257,21 +257,21 @@ public class Gimnasio {
     }
 
     // Método de registro de entrenamientos (Simón)
-    public void registrarEntrenamiento(String identificacionCliente, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora, int idSesion) throws Exception {
-        if (identificacionCliente == null || tipoEjercicio == null || fechaHora == null || idSesion < 0) {
+    public void registrarEntrenamiento(String identificacion, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora, int idSesion) throws Exception {
+        if (identificacion == null || tipoEjercicio == null || fechaHora == null || idSesion < 0) {
             throw new Exception("Datos del entrenamiento no pueden ser nulos");
         }
 
-        Cliente cliente = buscarClientePorIdentificacion(identificacionCliente);
+        Cliente cliente = buscarClientePorIdentificacion(identificacion);
         if (cliente == null) {
-            throw new Exception("Cliente con cedula" + identificacionCliente + " no se encontro al usuario");
+            throw new Exception("Cliente con cedula" + identificacion + " no se encontro al usuario");
         }
 
         Entrenamiento nuevoEntrenamiento = new Entrenamiento(idSesion, tipoEjercicio, duracion, caloriasQuemadas, fechaHora);
 
         cliente.getHistorialEntrenamientos().add(nuevoEntrenamiento);
 
-        System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacionCliente);
+        System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacion);
 
     }
 
