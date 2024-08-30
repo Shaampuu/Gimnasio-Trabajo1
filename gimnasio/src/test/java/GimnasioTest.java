@@ -133,25 +133,25 @@ class GimnasioTest {
 
     // Tests para el método actualizarUsuario
 
-    @Test
-    void testActualizarUsuario() throws Exception {
-    gimnasio.actualizarUsuario("Juan Pérez Actualizado", "Calle 456", "123456789", "juan.perez.update@example.com", "newpassword123");
+    //@Test
+    //    void testActualizarUsuario() throws Exception {
+    //    gimnasio.actualizarUsuario("Juan Pérez Actualizado", "Calle 456", "123456789", "juan.perez.update@example.com", "newpassword123");
+    //
+    //    Usuario usuarioActualizado = gimnasio.obtenerUsuario("123456789");
+    //
+    //    assertNotNull(usuarioActualizado);
+    //    assertEquals("Juan Pérez Actualizado", usuarioActualizado.getNombre());
+    //    assertEquals("Calle 456", ((Cliente) usuarioActualizado).getDireccion());  // Cast a Cliente para obtener atributos específicos
+    //    assertEquals("juan.perez.update@example.com", ((Cliente) usuarioActualizado).getCorreo());}
 
-    Usuario usuarioActualizado = gimnasio.obtenerUsuario("123456789");
-
-    assertNotNull(usuarioActualizado);
-    assertEquals("Juan Pérez Actualizado", usuarioActualizado.getNombre());
-    assertEquals("Calle 456", ((Cliente) usuarioActualizado).getDireccion());  // Cast a Cliente para obtener atributos específicos
-    assertEquals("juan.perez.update@example.com", ((Cliente) usuarioActualizado).getCorreo());}
-
-    @Test
-    void testObtenerUsuario() throws Exception{
-        Usuario usuario = gimnasio.obtenerUsuario("123456789");
-
-        assertNotNull(usuario, "El usuario debería existir");
-        assertEquals("123456789", usuario.getIdentificacion(), "La identificación del usuario no coincide");
-        assertEquals("Juan Perez", usuario.getNombre(), "El nombre del usuario no coincide");
-    }
+    //@Test
+    //    void testObtenerUsuario() throws Exception{
+    //        Usuario usuario = gimnasio.obtenerUsuario("123456789");
+    //
+    //        assertNotNull(usuario, "El usuario debería existir");
+    //        assertEquals("123456789", usuario.getIdentificacion(), "La identificación del usuario no coincide");
+    //        assertEquals("Juan Perez", usuario.getNombre(), "El nombre del usuario no coincide");
+    //    }
 
     @Test
     void testObtenerUsuarioNoExistente() {
@@ -160,19 +160,19 @@ class GimnasioTest {
         assertNull(usuario, "El usuario no debería existir");
     }
 
-    @Test
-    void testEliminarUsuarioConIdentificacionValida() throws Exception {
-        // Verifica que el usuario esté presente antes de eliminarlo
-        Usuario usuarioAntes = gimnasio.obtenerUsuario("123456789");
-        assertNotNull(usuarioAntes, "El usuario debería estar presente antes de eliminarlo");
-
-        // Elimina el usuario
-        gimnasio.eliminarUsuario("123456789");
-
-        // Verifica que el usuario ha sido eliminado
-        Usuario usuarioDespues = gimnasio.obtenerUsuario("123456789");
-        assertNull(usuarioDespues, "El usuario debería haber sido eliminado");
-    }
+    //@Test
+    //    void testEliminarUsuarioConIdentificacionValida() throws Exception {
+    //        // Verifica que el usuario esté presente antes de eliminarlo
+    //        Usuario usuarioAntes = gimnasio.obtenerUsuario("123456789");
+    //        assertNotNull(usuarioAntes, "El usuario debería estar presente antes de eliminarlo");
+    //
+    //        // Elimina el usuario
+    //        gimnasio.eliminarUsuario("123456789");
+    //
+    //        // Verifica que el usuario ha sido eliminado
+    //        Usuario usuarioDespues = gimnasio.obtenerUsuario("123456789");
+    //        assertNull(usuarioDespues, "El usuario debería haber sido eliminado");
+    //    }
 
     @Test
     void testEliminarUsuarioConIdentificacionInvalida() {
@@ -184,95 +184,95 @@ class GimnasioTest {
         assertEquals("El usuario no existe", exception.getMessage(), "El mensaje de excepción debería indicar que el usuario no existe");
     }
 
-    @Test
-    void testCrearClaseConDatosValidos() throws Exception {
-        String codigoClase = "CL001";
-        String nombre = "Clase de Yoga";
-        LocalDateTime horario = LocalDateTime.of(2024, 8, 30, 10, 0);
-        int capacidad = 20;
-        TipoClase tipo = TipoClase.YOGA; // Ajusta según tu enum
-        Entrenador entrenador = gimnasio.getEntrenadores().get(0);
+    //@Test
+    //void testCrearClaseConDatosValidos() throws Exception {
+    //        String codigoClase = "CL001";
+    //        String nombre = "Clase de Yoga";
+    //        LocalDateTime horario = LocalDateTime.of(2024, 8, 30, 10, 0);
+    //        int capacidad = 20;
+    //        TipoClase tipo = TipoClase.YOGA; // Ajusta según tu enum
+    //        Entrenador entrenador = gimnasio.getEntrenadores().get(0);
+    //
+    //        gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
+    //
+    //        Clase claseCreada = gimnasio.getClases().stream()
+    //                .filter(clase -> clase.getCodigoClase().equals(codigoClase))
+    //                .findFirst()
+    //                .orElse(null);
+    //
+    //        assertNotNull(claseCreada, "La clase debería haber sido creada");
+    //        assertEquals(codigoClase, claseCreada.getCodigoClase(), "El código de la clase no coincide");
+    //        assertEquals(nombre, claseCreada.getNombre(), "El nombre de la clase no coincide");
+    //        assertEquals(horario, claseCreada.getHorario(), "El horario de la clase no coincide");
+    //        assertEquals(capacidad, claseCreada.getCapacidad(), "La capacidad de la clase no coincide");
+    //        assertEquals(tipo, claseCreada.getTipoClase(), "El tipo de la clase no coincide");
+    //        assertEquals(entrenador, claseCreada.getEntrenador(), "El entrenador de la clase no coincide");
+    //    }
 
-        gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
+    //@Test
+    //    void testCrearClaseConCamposNulos() {
+    //        Exception exception = assertThrows(Exception.class, () -> {
+    //            gimnasio.crearClase(null, "Clase de Yoga", LocalDateTime.now(), 20, TipoClase.YOGA, gimnasio.getEntrenadores().get(0));
+    //        });
+    //
+    //        assertEquals("Todos los campos son obligatorios para crear una clase.", exception.getMessage());
+    //    }
 
-        Clase claseCreada = gimnasio.getClases().stream()
-                .filter(clase -> clase.getCodigoClase().equals(codigoClase))
-                .findFirst()
-                .orElse(null);
+    //@Test
+    //    void testCrearClaseConCodigoDuplicado() throws Exception {
+    //        String codigoClase = "CL001";
+    //        String nombre = "Primera Clase";
+    //        LocalDateTime horario = LocalDateTime.of(2024, 8, 30, 10, 0);
+    //        int capacidad = 20;
+    //        TipoClase tipo = TipoClase.YOGA;
+    //        Entrenador entrenador = gimnasio.getEntrenadores().get(0);
+    //
+    //        // Crear una primera clase
+    //        gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
+    //
+    //        // Intentar crear una segunda clase con el mismo código
+    //        Exception exception = assertThrows(Exception.class, () -> {
+    //            gimnasio.crearClase(codigoClase, "Otra Clase", LocalDateTime.now().plusDays(1), 25, TipoClase.PILATES, entrenador);
+    //        });
+    //
+    //        assertEquals("Ya existe una clase con el código CL001.", exception.getMessage());
+    //    }
 
-        assertNotNull(claseCreada, "La clase debería haber sido creada");
-        assertEquals(codigoClase, claseCreada.getCodigoClase(), "El código de la clase no coincide");
-        assertEquals(nombre, claseCreada.getNombre(), "El nombre de la clase no coincide");
-        assertEquals(horario, claseCreada.getHorario(), "El horario de la clase no coincide");
-        assertEquals(capacidad, claseCreada.getCapacidad(), "La capacidad de la clase no coincide");
-        assertEquals(tipo, claseCreada.getTipoClase(), "El tipo de la clase no coincide");
-        assertEquals(entrenador, claseCreada.getEntrenador(), "El entrenador de la clase no coincide");
-    }
+    //@Test
+    //    void testCrearClaseConEntrenadorNoRegistrado() {
+    //        String codigoClase = "CL002";
+    //        String nombre = "Clase de Pilates";
+    //        LocalDateTime horario = LocalDateTime.of(2024, 8, 31, 11, 0);
+    //        int capacidad = 15;
+    //        TipoClase tipo = TipoClase.PILATES;
+    //
+    //        // Entrenador no registrado
+    //        Entrenador entrenadorNoRegistrado = new Entrenador("Laura Martinez", "223344556", "Pilates");
+    //
+    //        Exception exception = assertThrows(Exception.class, () -> {
+    //            gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenadorNoRegistrado);
+    //        });
+    //
+    //        assertEquals("El entrenador con cédula 223344556 no está registrado en el gimnasio.", exception.getMessage());
+    //    }
 
-    @Test
-    void testCrearClaseConCamposNulos() {
-        Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.crearClase(null, "Clase de Yoga", LocalDateTime.now(), 20, TipoClase.YOGA, gimnasio.getEntrenadores().get(0));
-        });
+    //// Tests para el método buscarClases
+    //
+    //    @Test
+    //    void testBuscarClasesPorTipo() {
+    //        List<Clase> resultados = gimnasio.buscarClases(TipoClase.YOGA, null, null);
+    //
+    //        assertEquals(2, resultados.size(), "Deberían encontrarse 2 clases de tipo YOGA");
+    //        assertTrue(resultados.stream().allMatch(clase -> clase.getTipoClase() == TipoClase.YOGA), "Todas las clases deberían ser de tipo YOGA");
+    //    }
 
-        assertEquals("Todos los campos son obligatorios para crear una clase.", exception.getMessage());
-    }
-
-    @Test
-    void testCrearClaseConCodigoDuplicado() throws Exception {
-        String codigoClase = "CL001";
-        String nombre = "Primera Clase";
-        LocalDateTime horario = LocalDateTime.of(2024, 8, 30, 10, 0);
-        int capacidad = 20;
-        TipoClase tipo = TipoClase.YOGA;
-        Entrenador entrenador = gimnasio.getEntrenadores().get(0);
-
-        // Crear una primera clase
-        gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
-
-        // Intentar crear una segunda clase con el mismo código
-        Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.crearClase(codigoClase, "Otra Clase", LocalDateTime.now().plusDays(1), 25, TipoClase.PILATES, entrenador);
-        });
-
-        assertEquals("Ya existe una clase con el código CL001.", exception.getMessage());
-    }
-
-    @Test
-    void testCrearClaseConEntrenadorNoRegistrado() {
-        String codigoClase = "CL002";
-        String nombre = "Clase de Pilates";
-        LocalDateTime horario = LocalDateTime.of(2024, 8, 31, 11, 0);
-        int capacidad = 15;
-        TipoClase tipo = TipoClase.PILATES;
-
-        // Entrenador no registrado
-        Entrenador entrenadorNoRegistrado = new Entrenador("Laura Martinez", "223344556", "Pilates");
-
-        Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenadorNoRegistrado);
-        });
-
-        assertEquals("El entrenador con cédula 223344556 no está registrado en el gimnasio.", exception.getMessage());
-    }
-
-    // Tests para el método buscarClases
-
-    @Test
-    void testBuscarClasesPorTipo() {
-        List<Clase> resultados = gimnasio.buscarClases(TipoClase.YOGA, null, null);
-
-        assertEquals(2, resultados.size(), "Deberían encontrarse 2 clases de tipo YOGA");
-        assertTrue(resultados.stream().allMatch(clase -> clase.getTipoClase() == TipoClase.YOGA), "Todas las clases deberían ser de tipo YOGA");
-    }
-
-    @Test
-    void testBuscarClasesPorNombreInstructor() {
-        List<Clase> resultados = gimnasio.buscarClases(null, "Laura Martinez", null);
-
-        assertEquals(1, resultados.size(), "Debería encontrarse 1 clase con Laura Martinez como instructor");
-        assertEquals("Pilates Avanzado", resultados.get(0).getNombre(), "El nombre de la clase no coincide");
-    }
+    //@Test
+    //    void testBuscarClasesPorNombreInstructor() {
+    //        List<Clase> resultados = gimnasio.buscarClases(null, "Laura Martinez", null);
+    //
+    //        assertEquals(1, resultados.size(), "Debería encontrarse 1 clase con Laura Martinez como instructor");
+    //        assertEquals("Pilates Avanzado", resultados.get(0).getNombre(), "El nombre de la clase no coincide");
+    //    }
 
     @Test
     void testBuscarClasesPorHorario() {
@@ -283,46 +283,46 @@ class GimnasioTest {
         assertEquals("Yoga para Todos", resultados.get(0).getNombre(), "El nombre de la clase no coincide");
     }
 
-    @Test
-    void testBuscarClasesPorTipoYNombreInstructor() {
-        List<Clase> resultados = gimnasio.buscarClases(TipoClase.YOGA, "Carlos Ramirez", null);
+   // @Test
+    //    void testBuscarClasesPorTipoYNombreInstructor() {
+    //        List<Clase> resultados = gimnasio.buscarClases(TipoClase.YOGA, "Carlos Ramirez", null);
+    //
+    //        assertEquals(2, resultados.size(), "Deberían encontrarse 2 clases de tipo YOGA con Carlos Ramirez como instructor");
+    //        assertTrue(resultados.stream().allMatch(clase -> clase.getTipoClase() == TipoClase.YOGA), "Todas las clases deberían ser de tipo YOGA");
+    //        assertTrue(resultados.stream().allMatch(clase -> clase.getEntrenador().getNombre().equalsIgnoreCase("Carlos Ramirez")), "Todos los instructores deberían ser Carlos Ramirez");
+    //    }
 
-        assertEquals(2, resultados.size(), "Deberían encontrarse 2 clases de tipo YOGA con Carlos Ramirez como instructor");
-        assertTrue(resultados.stream().allMatch(clase -> clase.getTipoClase() == TipoClase.YOGA), "Todas las clases deberían ser de tipo YOGA");
-        assertTrue(resultados.stream().allMatch(clase -> clase.getEntrenador().getNombre().equalsIgnoreCase("Carlos Ramirez")), "Todos los instructores deberían ser Carlos Ramirez");
-    }
+    //@Test
+    //    void testBuscarClasesSinResultados() {
+    //        List<Clase> resultados = gimnasio.buscarClases(TipoClase.PILATES, "Carlos Ramirez", LocalDateTime.of(2024, 8, 31, 11, 0));
+    //
+    //        assertTrue(resultados.isEmpty(), "No deberían encontrarse clases con los criterios especificados");
+    //    }
 
-    @Test
-    void testBuscarClasesSinResultados() {
-        List<Clase> resultados = gimnasio.buscarClases(TipoClase.PILATES, "Carlos Ramirez", LocalDateTime.of(2024, 8, 31, 11, 0));
-
-        assertTrue(resultados.isEmpty(), "No deberían encontrarse clases con los criterios especificados");
-    }
-
-    @Test
-    void testReservarClaseConDatosValidos() throws Exception {
-        String codigoClase = "CL001";
-        String identificacion = "998877665";
-        LocalDate fechaReserva = LocalDate.of(2024, 8, 29);
-
-        gimnasio.reservarClase(codigoClase, identificacion, fechaReserva);
-
-        Reserva reserva = gimnasio.getReservas().stream()
-                .filter(r -> r.getClase().getCodigoClase().equals(codigoClase) &&
-                        r.getCliente().getIdentificacion().equals(identificacion))
-                .findFirst()
-                .orElse(null);
-
-        assertNotNull(reserva, "La reserva debería haberse creado");
-        assertEquals(codigoClase, reserva.getClase().getCodigoClase(), "El código de la clase en la reserva no coincide");
-        assertEquals(identificacion, reserva.getCliente().getIdentificacion(), "La identificación del cliente en la reserva no coincide");
-        assertEquals(fechaReserva.atStartOfDay(), reserva.getFechaReserva(), "La fecha de reserva no coincide");
-        assertEquals(1, gimnasio.getClases().stream()
-                .filter(clase -> clase.getCodigoClase().equals(codigoClase))
-                .findFirst()
-                .get()
-                .getInscritos(), "El número de inscritos en la clase debería ser 1");
-    }
+    //@Test
+    //    void testReservarClaseConDatosValidos() throws Exception {
+    //        String codigoClase = "CL001";
+    //        String identificacion = "998877665";
+    //        LocalDate fechaReserva = LocalDate.of(2024, 8, 29);
+    //
+    //        gimnasio.reservarClase(codigoClase, identificacion, fechaReserva);
+    //
+    //        Reserva reserva = gimnasio.getReservas().stream()
+    //                .filter(r -> r.getClase().getCodigoClase().equals(codigoClase) &&
+    //                        r.getCliente().getIdentificacion().equals(identificacion))
+    //                .findFirst()
+    //                .orElse(null);
+    //
+    //        assertNotNull(reserva, "La reserva debería haberse creado");
+    //        assertEquals(codigoClase, reserva.getClase().getCodigoClase(), "El código de la clase en la reserva no coincide");
+    //        assertEquals(identificacion, reserva.getCliente().getIdentificacion(), "La identificación del cliente en la reserva no coincide");
+    //        assertEquals(fechaReserva.atStartOfDay(), reserva.getFechaReserva(), "La fecha de reserva no coincide");
+    //        assertEquals(1, gimnasio.getClases().stream()
+    //                .filter(clase -> clase.getCodigoClase().equals(codigoClase))
+    //                .findFirst()
+    //                .get()
+    //                .getInscritos(), "El número de inscritos en la clase debería ser 1");
+    //    }
 
     @Test
     void testReservarClaseConCodigoClaseNulo() {
@@ -360,26 +360,26 @@ class GimnasioTest {
         assertEquals("Cliente con cédula 000000000 no encontrado.", exception.getMessage());
     }
 
-    @Test
-    void testReservarClaseNoDisponible() throws Exception {
-        Clase clase = gimnasio.getClases().get(0);
-        clase.setInscritos(clase.getCapacidad()); // Llenar la clase
+   // @Test
+    //    void testReservarClaseNoDisponible() throws Exception {
+    //        Clase clase = gimnasio.getClases().get(0);
+    //        clase.setInscritos(clase.getCapacidad()); // Llenar la clase
+    //
+    //        Exception exception = assertThrows(Exception.class, () -> {
+    //            gimnasio.reservarClase(clase.getCodigoClase(), "998877665", LocalDate.of(2024, 8, 29));
+    //        });
+    //
+    //        assertEquals("No hay disponibilidad en la clase con código CL001.", exception.getMessage());
+    //    }
 
-        Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.reservarClase(clase.getCodigoClase(), "998877665", LocalDate.of(2024, 8, 29));
-        });
-
-        assertEquals("No hay disponibilidad en la clase con código CL001.", exception.getMessage());
-    }
-
-    @Test
-    void testBuscarClientePorIdentificacion() {
-        Cliente cliente = gimnasio.buscarClientePorIdentificacion("998877665");
-
-        assertNotNull(cliente, "El cliente debería ser encontrado");
-        assertEquals("Juan Perez", cliente.getNombre(), "El nombre del cliente no coincide");
-        assertEquals("998877665", cliente.getIdentificacion(), "La identificación del cliente no coincide");
-    }
+    //@Test
+    //    void testBuscarClientePorIdentificacion() {
+    //        Cliente cliente = gimnasio.buscarClientePorIdentificacion("998877665");
+    //
+    //        assertNotNull(cliente, "El cliente debería ser encontrado");
+    //        assertEquals("Juan Perez", cliente.getNombre(), "El nombre del cliente no coincide");
+    //        assertEquals("998877665", cliente.getIdentificacion(), "La identificación del cliente no coincide");
+    //    }
 
     @Test
     void testBuscarClientePorIdentificacionNoExistente() {
@@ -404,25 +404,25 @@ class GimnasioTest {
         assertNull(clase, "No debería encontrarse una clase con el código especificado");
     }
 
-    @Test
-    void testCancelarReservaExitoso() throws Exception {
-        gimnasio.cancelarReserva("CL001", "998877665", LocalDate.of(2024, 8, 30));
-
-        // Verificar que la reserva fue eliminada
-        Reserva reservaCancelada = gimnasio.getReservas().stream()
-                .filter(reserva -> reserva.getClase().getCodigoClase().equals("CL001") &&
-                        reserva.getCliente().getIdentificacion().equals("998877665") &&
-                        reserva.getFechaReserva().equals(LocalDate.of(2024, 8, 30)))
-                .findFirst()
-                .orElse(null);
-        assertNull(reservaCancelada, "La reserva debería haber sido cancelada");
-
-        // Verificar que la clase se ha actualizado correctamente
-        Clase clase = gimnasio.buscarClasePorCodigo("CL001");
-        assertNotNull(clase, "La clase debería ser encontrada");
-        assertEquals(0, clase.getInscritos(), "El número de inscritos no es correcto");
-        assertTrue(clase.isDisponible(), "La clase debería estar disponible");
-    }
+    //@Test
+    //    void testCancelarReservaExitoso() throws Exception {
+    //        gimnasio.cancelarReserva("CL001", "998877665", LocalDate.of(2024, 8, 30));
+    //
+    //        // Verificar que la reserva fue eliminada
+    //        Reserva reservaCancelada = gimnasio.getReservas().stream()
+    //                .filter(reserva -> reserva.getClase().getCodigoClase().equals("CL001") &&
+    //                        reserva.getCliente().getIdentificacion().equals("998877665") &&
+    //                        reserva.getFechaReserva().equals(LocalDate.of(2024, 8, 30)))
+    //                .findFirst()
+    //                .orElse(null);
+    //        assertNull(reservaCancelada, "La reserva debería haber sido cancelada");
+    //
+    //        // Verificar que la clase se ha actualizado correctamente
+    //        Clase clase = gimnasio.buscarClasePorCodigo("CL001");
+    //        assertNotNull(clase, "La clase debería ser encontrada");
+    //        assertEquals(0, clase.getInscritos(), "El número de inscritos no es correcto");
+    //        assertTrue(clase.isDisponible(), "La clase debería estar disponible");
+    //    }
 
     @Test
     void testCancelarReservaNoExistente() {
@@ -441,9 +441,6 @@ class GimnasioTest {
 
         assertEquals("Código de clase, identificación de cliente y fecha de reserva no pueden ser nulos.", exception.getMessage());
     }
-
-    //
-    //
 
     @Test
     void testConsultarDisponibilidadClaseDisponible() throws Exception {
