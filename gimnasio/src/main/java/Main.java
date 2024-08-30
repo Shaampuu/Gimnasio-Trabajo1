@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         try {
-            // Crear el gimnasio con listas vacías
+            // Gimnasio con listas vacías
             Gimnasio gimnasio = Gimnasio.builder()
                     .clases(new ArrayList<>())
                     .reservas(new ArrayList<>())
