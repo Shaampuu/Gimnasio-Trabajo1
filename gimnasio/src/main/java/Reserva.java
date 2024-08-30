@@ -1,18 +1,18 @@
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class Reserva {
     private Clase clase;
     private Cliente cliente;
-    private LocalDate fechaReserva;
+    private LocalDateTime fechaReserva;
 
-    public Reserva(Clase clase, Cliente cliente, LocalDate fechaReserva) {
+    public Reserva(Clase clase, Cliente cliente, LocalDateTime fechaReserva) {
         this.clase = clase;
         this.cliente = cliente;
-        this.fechaReserva = fechaReserva;
+        this.fechaReserva = fechaReserva.atStartOfDay();
     }
 }
