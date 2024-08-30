@@ -23,16 +23,42 @@ class GimnasioTest {
                 .usuarios(new ArrayList<>())
                 .build();
 
-        // Configurar datos iniciales para las pruebas
-        Entrenador entrenador = new Entrenador("Carlos Ramirez", "112233445", "Cardio");
-        Clase clase1 = new Clase("CL001", "Yoga para Todos", LocalDateTime.of(2024, 8, 30, 10, 0), 20, TipoClase.YOGA, entrenador);
-        Clase clase2 = new Clase("CL002", "Pilates Avanzado", LocalDateTime.of(2024, 8, 31, 11, 0), 15, TipoClase.PILATES, entrenador);
+        // Crear y agregar entrenadores
+        Entrenador entrenador1 = new Entrenador("Carlos Ramirez", "112233445", "Cardio");
+        Entrenador entrenador2 = new Entrenador("Ana Gonzalez", "223344556", "Pilates");
+        gimnasio.getEntrenadores().add(entrenador1);
+        gimnasio.getEntrenadores().add(entrenador2);
+
+        // Crear y agregar clases
+        Clase clase1 = new Clase("CL001", "Yoga para Todos", LocalDateTime.of(2024, 8, 30, 10, 0), 20, TipoClase.YOGA, entrenador1);
+        Clase clase2 = new Clase("CL002", "Pilates Avanzado", LocalDateTime.of(2024, 8, 31, 11, 0), 15, TipoClase.PILATES, entrenador2);
         gimnasio.getClases().add(clase1);
         gimnasio.getClases().add(clase2);
 
         // Configurar disponibilidad
         clase1.setDisponible(true);
         clase2.setDisponible(false);
+
+        // Crear y agregar clientes
+        Cliente cliente1 = gimnasio.crearCliente("Juan Perez", "998877665", "Calle 123", "password123", "987654321", "juan.perez@example.com");
+        Cliente cliente2 = gimnasio.crearCliente("Maria Lopez", "987654321", "Avenida 456", "password456", "123456789", "maria.lopez@example.com");
+        gimnasio.getClientes().add(cliente1);
+        gimnasio.getClientes().add(cliente2);
+
+
+        // Crear y agregar usuarios
+        Usuario usuario1 = new Usuario("angelica", "123456789");
+        Usuario usuario2 = new Usuario("pedro", "987654321");
+        gimnasio.agregarUsuario(usuario1);
+        gimnasio.agregarUsuario(usuario2);
+
+        // Crear y agregar reservas
+        Reserva reserva1 = new Reserva(clase1, cliente1, LocalDate.of(2024, 8, 29).atStartOfDay());
+        gimnasio.getReservas().add(reserva1);
+
+        // Crear un entrenamiento para pruebas
+        Entrenamiento entrenamiento1 = new Entrenamiento(1, TipoEjercicio.CARDIO, 30, 300, LocalDateTime.now());
+
 
 }
 
@@ -132,7 +158,7 @@ class GimnasioTest {
 
     // Tests para el método actualizarUsuario
 
-    @Test// Creo que esta bien, IDK
+    @Test
     void testActualizarUsuario() throws Exception {
 
         List<Usuario> usuarios = new ArrayList<>();
@@ -163,7 +189,7 @@ class GimnasioTest {
     }
 
 
-    @Test//Creo que ya esta bien
+    @Test
     void testEliminarUsuarioExistente() throws Exception {
         // Paso 1: Configurar el gimnasio con un usuario existente
         List<Usuario> usuarios = new ArrayList<>();
@@ -195,7 +221,7 @@ class GimnasioTest {
         assertEquals("El usuario no existe", exception.getMessage());
     }
 
-    @Test//Bien creo
+    @Test
     void testCrearClaseConDatosValidos() {
         // Configuración de la clase y el gimnasio
         List<Clase> clases = new ArrayList<>();
@@ -214,7 +240,7 @@ class GimnasioTest {
         assertEquals(clase1, resultados.get(0), "La clase encontrada debería ser la esperada");
     }
 
-    @Test //CORREGIR
+    @Test
     void testCrearClaseConCamposNulos() {
         Exception exception = assertThrows(Exception.class, () -> {
             gimnasio.crearClase(null, "Clase de Yoga", LocalDateTime.now(), 20, TipoClase.YOGA, gimnasio.getEntrenadores().get(0));
@@ -223,16 +249,16 @@ class GimnasioTest {
         assertEquals("Todos los campos son obligatorios para crear una clase.", exception.getMessage());
     }
 
-    @Test //CORREGIR
+    @Test
     void testCrearClaseConCodigoDuplicado() throws Exception {
-        String codigoClase = "CL001";
+        String codigoClase = "CL003";
         String nombre = "Primera Clase";
         LocalDateTime horario = LocalDateTime.of(2024, 8, 30, 10, 0);
         int capacidad = 20;
         TipoClase tipo = TipoClase.YOGA;
         Entrenador entrenador = gimnasio.getEntrenadores().get(0);
 
-        // Crear una primera clase
+        // Crear una primera clase con el nuevo código
         gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
 
         // Intentar crear una segunda clase con el mismo código
@@ -240,18 +266,17 @@ class GimnasioTest {
             gimnasio.crearClase(codigoClase, "Otra Clase", LocalDateTime.now().plusDays(1), 25, TipoClase.PILATES, entrenador);
         });
 
-        assertEquals("Ya existe una clase con el código CL001.", exception.getMessage());
+        assertEquals("Ya existe una clase con el código " + codigoClase + ".", exception.getMessage());
     }
-
-    @Test //CORREGIR
+    @Test
     void testCrearClaseConEntrenadorNoRegistrado() {
-        String codigoClase = "CL002";
+        String codigoClase = "CL004";
         String nombre = "Clase de Pilates";
         LocalDateTime horario = LocalDateTime.of(2024, 8, 31, 11, 0);
         int capacidad = 15;
         TipoClase tipo = TipoClase.PILATES;
 
-        // Entrenador no registrado
+        // Crear un entrenador no registrado
         Entrenador entrenadorNoRegistrado = new Entrenador("Laura Martinez", "223344556", "Pilates");
 
         Exception exception = assertThrows(Exception.class, () -> {
@@ -261,7 +286,7 @@ class GimnasioTest {
         assertEquals("El entrenador con cédula 223344556 no está registrado en el gimnasio.", exception.getMessage());
     }
 
-    @Test//Bien
+    @Test
     void testBuscarClasesConParametrosExactos() {
         // Paso 1: Configurar el gimnasio con clases
         List<Clase> clases = new ArrayList<>();
@@ -488,7 +513,7 @@ class GimnasioTest {
     }
 
     @Test
-void testRegistrarEntrenamientoConDatosValidos() {
+    void testRegistrarEntrenamientoConDatosValidos() {
     // Datos de entrada
     String identificacion = "123";
     TipoEjercicio tipoEjercicio = TipoEjercicio.CARDIO;
@@ -512,36 +537,33 @@ void testRegistrarEntrenamientoConDatosValidos() {
     System.out.println("Prueba pasada: Entrenamiento registrado con éxito.");
 }
 
-@Test//corregir
-void testRegistrarEntrenamientoConDatosInvalidos() {
-    Exception exception;
+    @Test
+    void testRegistrarEntrenamientoConDatosInvalidos() {
 
-    // Prueba con identificación nula
-    exception = assertThrows(Exception.class, () -> {
-        new Entrenamiento(1, TipoEjercicio.CARDIO, 30, 300, LocalDateTime.now());
-    });
-    assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
+        // Prueba con identificación nula
+        Exception exception = assertThrows(Exception.class, () -> {
+            gimnasio.registrarEntrenamiento(null, TipoEjercicio.CARDIO, 30, 300, LocalDateTime.now(), 1);
+        });
+        assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
 
-    // Prueba con tipo de ejercicio nulo
-    exception = assertThrows(Exception.class, () -> {
-        new Entrenamiento(1, null, 30, 300, LocalDateTime.now());
-    });
-    assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
+        // Prueba con tipo de ejercicio nulo
+        exception = assertThrows(Exception.class, () -> {
+            gimnasio.registrarEntrenamiento("123", null, 30, 300, LocalDateTime.now(), 1);
+        });
+        assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
 
-    // Prueba con fecha y hora nula
-    exception = assertThrows(Exception.class, () -> {
-        new Entrenamiento(1, TipoEjercicio.CARDIO, 30, 300, null);
-    });
-    assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
+        // Prueba con fecha y hora nula
+        exception = assertThrows(Exception.class, () -> {
+            gimnasio.registrarEntrenamiento("123", TipoEjercicio.CARDIO, 30, 300, null, 1);
+        });
+        assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
 
-    // Prueba con ID de sesión negativo
-    exception = assertThrows(Exception.class, () -> {
-        new Entrenamiento(-1, TipoEjercicio.CARDIO, 30, 300, LocalDateTime.now());
-    });
-    assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
-}
-
-
+        // Prueba con ID de sesión negativo
+        exception = assertThrows(Exception.class, () -> {
+            gimnasio.registrarEntrenamiento("123", TipoEjercicio.CARDIO, 30, 300, LocalDateTime.now(), -1);
+        });
+        assertEquals("Datos del entrenamiento no pueden ser nulos", exception.getMessage(), "Mensaje de excepción incorrecto.");
+    }
 
 @Test
 void testObtenerClaseMasPopularNoHayClases() {
