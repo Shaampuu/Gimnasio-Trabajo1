@@ -9,16 +9,120 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class Gimnasio {
 
     private final ArrayList<Clase> clases;
     private final ArrayList<Reserva> reservas;
     private final ArrayList<Cliente> clientes;
     private final ArrayList<Entrenador> entrenadores;
+    private final ArrayList<Usuario> usuarios;
 
     //metodo de agregar usuario //angelica
-    //metodo de eliminar usuario
-    //metodo de actualizar usuario
+
+    public void agregarUsuario(Usuario usuario) throws Exception{
+        if(usuario == null){
+            throw new Exception("Usuario no puede ser nulo");
+        }
+        usuarios.add(usuario);
+    }
+    private Usuario crearCliente(String nombre, String identificacion, String direccion, String password, String correo, String telefono) throws  Exception {
+
+        if (nombre == null || nombre.isBlank()) {
+            throw new Exception("El nombre es obligatorio");
+        }
+
+        if (identificacion == null || identificacion.isBlank()) {
+            throw new Exception("El número de identificación es obligatorio.");
+        }
+
+        if (direccion == null || direccion.isBlank()) {
+            throw new Exception("La dirección es obligatoria");
+        }
+
+        if (password == null || password.isBlank()) {
+            throw new Exception("La contraseña es obligatoria");
+        }
+
+        if (correo == null || correo.isBlank()) {
+            throw new Exception("El correo es obligatorio");
+        }
+
+        if (telefono == null || telefono.isBlank()) {
+            throw new Exception("El teléfono es obligatorio");
+        }
+        return new Cliente(nombre,identificacion, direccion, password, telefono,correo);
+    }
+    public Usuario crearEntrenador(String nombre, String identificacion, String especialidad) throws Exception{
+
+        if (nombre == null || nombre.isBlank()) {
+            throw new Exception("El nombre es obligatorio");
+        }
+
+        if (identificacion == null || identificacion.isBlank()) {
+            throw new Exception("El número de identificación es obligatorio.");
+        }
+
+        if (especialidad == null || especialidad.isBlank()) {
+            throw new Exception("La especialidad es obligatoria");
+        }
+
+        return new Entrenador(nombre, identificacion, especialidad);
+
+    }
+
+    //método de actualizar usuario
+
+    public void actualizarUsuario(String nombre, String direccion, String identificacion, String correoElectronico, String contrasena) throws Exception{
+
+        if(nombre == null || nombre.isBlank()){
+            throw new Exception("El nombre es obligatorio");
+        }
+
+        if(direccion == null || direccion.isBlank()){
+            throw new Exception("La dirección es obligatoria");
+        }
+
+        if(correoElectronico == null || correoElectronico.isBlank()){
+            throw new Exception("El correo electronico es obligatorio");
+        }
+
+        if(contrasena == null || contrasena.isBlank()){
+            throw new Exception("La contraseña es obligatoria");
+        }
+
+        if(obtenerUsuario(identificacion) == null){
+            throw new Exception("No existe un usuario con el número de identificación: "+identificacion);
+        }
+
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getIdentificacion().equals(identificacion)) {
+                Usuario usuario = new Usuario(nombre, identificacion );
+                usuarios.set(i, usuario);
+                break;
+            }
+        }
+    }
+
+    private Usuario obtenerUsuario(String numeroIdentificacion){
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getIdentificacion().equals(numeroIdentificacion)){
+                return usuarios.get(i);
+            }
+        }
+        return null;
+    }
+
+    //método de eliminar usuario
+
+    public void eliminarUsuario(String identificacion) throws Exception{
+        Usuario usuario = obtenerUsuario(identificacion);
+        if (usuario != null) {
+            usuarios.remove(usuario);
+        }else{
+            throw new Exception("El usuario no existe");
+        }
+    }
 
     // Método para crear una clase
     public void crearClase(String codigoClase, String nombre, LocalDateTime horario, int capacidad, TipoClase tipo, Entrenador entrenador) throws Exception {
