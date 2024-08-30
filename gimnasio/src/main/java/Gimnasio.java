@@ -180,17 +180,17 @@ public class Gimnasio {
     }
 
     // Método para reservar clases
-    public void reservarClase(String codigoClase, String identificacionCliente, LocalDate fechaReserva) throws Exception {
-        if (codigoClase == null || identificacionCliente == null) {
+    public void reservarClase(String codigoClase, String identificacion, LocalDate fechaReserva) throws Exception {
+        if (codigoClase == null || identificacion == null) {
             throw new Exception("Código de clase o identificación de cliente no pueden ser nulos.");
         }
         Clase clase = buscarClasePorCodigo(codigoClase);
         if (clase == null) {
             throw new Exception("Clase con código " + codigoClase + " no encontrada.");
         }
-        Cliente cliente = buscarClientePorIdentificacion(identificacionCliente);
+        Cliente cliente = buscarClientePorIdentificacion(identificacion);
         if (cliente == null) {
-            throw new Exception("Cliente con cédula " + identificacionCliente + " no encontrado.");
+            throw new Exception("Cliente con cédula " + identificacion + " no encontrado.");
         }
         if (!clase.isDisponible()) {
             throw new Exception("La clase con código " + codigoClase + " no está disponible.");
@@ -210,9 +210,9 @@ public class Gimnasio {
     }
 
     // Métodos privados para buscar cliente y clase
-    Cliente buscarClientePorIdentificacion(String identificacionCliente) {
+    Cliente buscarClientePorIdentificacion(String identificacion) {
         for (Cliente cliente : clientes) {
-            if (cliente.getIdentificacion().equals(identificacionCliente)) {
+            if (cliente.getIdentificacion().equals(identificacion)) {
                 return cliente;
             }
         }
@@ -229,8 +229,8 @@ public class Gimnasio {
     }
     // Método de cancelación de reserva de clases
 
-    public void cancelarReserva(String codigoClase, String identificacionCliente, LocalDate fechaReserva) throws Exception {
-        if (codigoClase == null || identificacionCliente == null || fechaReserva == null) {
+    public void cancelarReserva(String codigoClase, String identificacion, LocalDate fechaReserva) throws Exception {
+        if (codigoClase == null || identificacion == null || fechaReserva == null) {
             throw new Exception("Código de clase, identificación de cliente y fecha de reserva no pueden ser nulos.");
         }
 
@@ -238,7 +238,7 @@ public class Gimnasio {
 
         for (Reserva reserva : reservas) {
             if (reserva.getClase().getCodigoClase().equals(codigoClase) &&
-                    reserva.getCliente().getIdentificacion().equals(identificacionCliente) &&
+                    reserva.getCliente().getIdentificacion().equals(identificacion) &&
                     reserva.getFechaReserva().equals(fechaReserva)) {
                 reservaACancelar = reserva;
                 break;
