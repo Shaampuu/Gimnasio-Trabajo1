@@ -1,5 +1,6 @@
 package enums;
 
 public enum TipoClase {
-    YOGA, PILATES, CARDIO,FUERZA,ZUMBA, CROSSFIT
+    YOGA, PILATES, CARDIO,FUERZA,ZUMBA, CROSSFIT, KICKBOXING
+
 }

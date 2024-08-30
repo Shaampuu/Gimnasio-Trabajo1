@@ -23,6 +23,15 @@ class GimnasioTest {
                 .usuarios(new ArrayList<>())
                 .build();
 
+        // Registrar un entrenador válido para no interferir con la prueba de entrenador no registrado
+        Entrenador entrenadorRegistrado = new Entrenador("Ana López", "0987654321","Zumba");
+        gimnasio.getEntrenadores().add(entrenadorRegistrado);
+
+        // Crear una clase inicial para no tener conflictos de código en el test
+        Clase claseInicial = new Clase("CL004", "Pilates Básico",
+                LocalDateTime.of(2024, 9, 1, 8, 0), 15, TipoClase.PILATES, entrenadorRegistrado);
+        gimnasio.getClases().add(claseInicial);
+
         // Crear y agregar entrenadores
         Entrenador entrenador1 = new Entrenador("Carlos Ramirez", "112233445", "Cardio");
         Entrenador entrenador2 = new Entrenador("Ana Gonzalez", "223344556", "Pilates");
@@ -31,7 +40,7 @@ class GimnasioTest {
 
         // Crear y agregar clases
         Clase clase1 = new Clase("CL001", "Yoga para Todos", LocalDateTime.of(2024, 8, 30, 10, 0), 20, TipoClase.YOGA, entrenador1);
-        Clase clase2 = new Clase("CL002", "Pilates Avanzado", LocalDateTime.of(2024, 8, 31, 11, 0), 15, TipoClase.PILATES, entrenador2);
+        Clase clase2 = new Clase("CL003", "Pilates Avanzado", LocalDateTime.of(2024, 8, 31, 11, 0), 15, TipoClase.PILATES, entrenador2);
         gimnasio.getClases().add(clase1);
         gimnasio.getClases().add(clase2);
 
@@ -251,7 +260,7 @@ class GimnasioTest {
 
     @Test
     void testCrearClaseConCodigoDuplicado() throws Exception {
-        String codigoClase = "CL003";
+        String codigoClase = "CL006";
         String nombre = "Primera Clase";
         LocalDateTime horario = LocalDateTime.of(2024, 8, 30, 10, 0);
         int capacidad = 20;
@@ -270,21 +279,22 @@ class GimnasioTest {
     }
     @Test
     void testCrearClaseConEntrenadorNoRegistrado() {
-        String codigoClase = "CL004";
-        String nombre = "Clase de Pilates";
-        LocalDateTime horario = LocalDateTime.of(2024, 8, 31, 11, 0);
-        int capacidad = 15;
-        TipoClase tipo = TipoClase.PILATES;
-
         // Crear un entrenador no registrado
-        Entrenador entrenadorNoRegistrado = new Entrenador("Laura Martinez", "223344556", "Pilates");
+        Entrenador entrenadorNoRegistrado = new Entrenador("Luis Fernández", "1234567890", "Kickboxing");
 
+        // Intentar crear una clase con el entrenador no registrado y verificar la excepción
         Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.crearClase(codigoClase, nombre, horario, capacidad, tipo, entrenadorNoRegistrado);
+            gimnasio.crearClase("CL005", "Kickboxing Básico", LocalDateTime.of(2024, 9, 5, 17, 0), 20, TipoClase.KICKBOXING, entrenadorNoRegistrado);
         });
 
-        assertEquals("El entrenador con cédula 223344556 no está registrado en el gimnasio.", exception.getMessage());
+        // Verificar el mensaje de la excepción
+        String expectedMessage = "El entrenador con cédula 1234567890 no está registrado en el gimnasio.";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
     }
+
+
 
     @Test
     void testBuscarClasesConParametrosExactos() {
