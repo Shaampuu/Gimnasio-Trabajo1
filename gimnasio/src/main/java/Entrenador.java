@@ -12,7 +12,7 @@ public class Entrenador extends Usuario{
         this.especialidad = especialidad;
     }
 
-    public String getCedula() {
+    public String getIdentificacion() {
         return null;
     }
 }

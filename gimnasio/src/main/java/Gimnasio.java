@@ -1,4 +1,5 @@
 import enums.TipoClase;
+import enums.TipoEjercicio;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,15 +19,13 @@ public class Gimnasio {
     private final ArrayList<Entrenador> entrenadores;
     private final ArrayList<Usuario> usuarios;
 
-    //metodo de agregar usuario //angelica
-
     public void agregarUsuario(Usuario usuario) throws Exception{
         if(usuario == null){
             throw new Exception("Usuario no puede ser nulo");
         }
         usuarios.add(usuario);
     }
-    private Usuario crearCliente(String nombre, String identificacion, String direccion, String password, String correo, String telefono) throws  Exception {
+    public Usuario crearCliente(String nombre, String identificacion, String direccion, String password, String correo, String telefono) throws  Exception {
 
         if (nombre == null || nombre.isBlank()) {
             throw new Exception("El nombre es obligatorio");
@@ -124,30 +123,43 @@ public class Gimnasio {
         }
     }
 
+
     // Método para crear una clase
     public void crearClase(String codigoClase, String nombre, LocalDateTime horario, int capacidad, TipoClase tipo, Entrenador entrenador) throws Exception {
         if (codigoClase == null || nombre == null || horario == null || tipo == null || entrenador == null) {
             throw new Exception("Todos los campos son obligatorios para crear una clase.");
         }
+
+        // Verificar si el entrenador tiene una cédula válida
+        String identificacion = entrenador.getIdentificacion();
+        if (identificacion == null) {
+            throw new Exception("El entrenador debe tener una cédula válida.");
+        }
+
+        // Verificar que no exista una clase con el mismo código
         for (Clase claseExistente : clases) {
             if (claseExistente.getCodigoClase().equals(codigoClase)) {
                 throw new Exception("Ya existe una clase con el código " + codigoClase + ".");
             }
         }
+
+        // Verificar si el entrenador está registrado en el gimnasio
         boolean entrenadorRegistrado = false;
         for (Entrenador entrenadorExistente : entrenadores) {
-            if (entrenadorExistente.getCedula().equals(entrenador.getCedula())) {
+            if (identificacion.equals(entrenadorExistente.getIdentificacion())) {
                 entrenadorRegistrado = true;
                 break;
             }
         }
+
         if (!entrenadorRegistrado) {
-            throw new Exception("El entrenador con cédula " + entrenador.getCedula() + " no está registrado en el gimnasio.");
+            throw new Exception("El entrenador con cédula " + identificacion + " no está registrado en el gimnasio.");
         }
 
         Clase nuevaClase = new Clase(codigoClase, nombre, horario, capacidad, tipo, entrenador);
         clases.add(nuevaClase);
     }
+
 
     // Método de búsqueda de clases
     public List<Clase> buscarClases(TipoClase tipo, String nombreInstructor, LocalDateTime horario) {
@@ -198,7 +210,7 @@ public class Gimnasio {
     }
 
     // Métodos privados para buscar cliente y clase
-    private Cliente buscarClientePorIdentificacion(String identificacionCliente) {
+    Cliente buscarClientePorIdentificacion(String identificacionCliente) {
         for (Cliente cliente : clientes) {
             if (cliente.getIdentificacion().equals(identificacionCliente)) {
                 return cliente;
@@ -207,7 +219,7 @@ public class Gimnasio {
         return null;
     }
 
-    private Clase buscarClasePorCodigo(String codigoClase) {
+    Clase buscarClasePorCodigo(String codigoClase) {
         for (Clase clase : clases) {
             if (clase.getCodigoClase().equals(codigoClase)) {
                 return clase;
@@ -217,9 +229,127 @@ public class Gimnasio {
     }
     // Método de cancelación de reserva de clases
 
-    // Método de registro de entrenamientos (Simón) (Falta implementar)
-    // Método de consulta de historial de entrenamientos (Falta implementar)
-    // Método de generación de reportes (Falta implementar)
-    // Método de consulta de disponibilidad de una clase (Falta implementar)
+    public void cancelarReserva(String codigoClase, String identificacionCliente, LocalDate fechaReserva) throws Exception {
+        if (codigoClase == null || identificacionCliente == null || fechaReserva == null) {
+            throw new Exception("Código de clase, identificación de cliente y fecha de reserva no pueden ser nulos.");
+        }
+
+        Reserva reservaACancelar = null;
+
+        for (Reserva reserva : reservas) {
+            if (reserva.getClase().getCodigoClase().equals(codigoClase) &&
+                    reserva.getCliente().getIdentificacion().equals(identificacionCliente) &&
+                    reserva.getFechaReserva().equals(fechaReserva)) {
+                reservaACancelar = reserva;
+                break;
+            }
+        }
+
+        if (reservaACancelar == null) {
+            throw new Exception("No se encontró una reserva para cancelar con los datos proporcionados.");
+        }
+
+        reservas.remove(reservaACancelar);
+        Clase clase = reservaACancelar.getClase();
+
+        clase.setInscritos(clase.getInscritos() - 1);
+        clase.setDisponible(true);
+    }
+
+    // Método de registro de entrenamientos (Simón)
+    public void registrarEntrenamiento(String identificacionCliente, TipoEjercicio tipoEjercicio, int duracion, int caloriasQuemadas, LocalDateTime fechaHora, int idSesion) throws Exception {
+        if (identificacionCliente == null || tipoEjercicio == null || fechaHora == null || idSesion < 0) {
+            throw new Exception("Datos del entrenamiento no pueden ser nulos");
+        }
+
+        Cliente cliente = buscarClientePorIdentificacion(identificacionCliente);
+        if (cliente == null) {
+            throw new Exception("Cliente con cedula" + identificacionCliente + " no se encontro al usuario");
+        }
+
+        Entrenamiento nuevoEntrenamiento = new Entrenamiento(idSesion, tipoEjercicio, duracion, caloriasQuemadas, fechaHora);
+
+        cliente.getHistorialEntrenamientos().add(nuevoEntrenamiento);
+
+        System.out.println("Entrenamiento registrado exitosamente para el cliente con cedula" + identificacionCliente);
+
+    }
+
+    // Método de generación de reportes
+    public Clase obtenerClaseMasPopular() {
+        if (clases.isEmpty()) {
+            return null;
+        }
+
+        Clase claseMasPopular = null;
+        int maxInscritos = -1;
+
+        for (Clase clase : clases) {
+            int numInscritos = 0;
+            for (Cliente cliente : clientes) {
+                if (cliente.estaInscritoEn(clase)) {
+                    numInscritos++;
+                }
+            }
+
+            if (numInscritos > maxInscritos) {
+                maxInscritos = numInscritos;
+                claseMasPopular = clase;
+            }
+        }
+
+        return claseMasPopular;
+    }
+
+    public List<Cliente> obtenerTopTresUsuariosMasActivos() {
+        Cliente primero = null;
+        Cliente segundo = null;
+        Cliente tercero = null;
+
+        for (Cliente cliente : clientes) {
+            int caloriasQuemadas = cliente.caloriasTotalesQuemadas();
+
+            if (primero == null || caloriasQuemadas > primero.caloriasTotalesQuemadas()) {
+                tercero = segundo;
+                segundo = primero;
+                primero = cliente;
+            } else if (segundo == null || caloriasQuemadas > segundo.caloriasTotalesQuemadas()) {
+                tercero = segundo;
+                segundo = cliente;
+            } else if (tercero == null || caloriasQuemadas > tercero.caloriasTotalesQuemadas()) {
+                tercero = cliente;
+            }
+        }
+
+        List<Cliente> topTres = new ArrayList<>();
+        if (primero != null) topTres.add(primero);
+        if (segundo != null) topTres.add(segundo);
+        if (tercero != null) topTres.add(tercero);
+
+        return topTres;
+    }
+
+    // Reporte 3: Tipo de ejercicio más practicado (el que más tiempo tiene registrado)
+    public TipoEjercicio obtenerTipoEjercicioMasPracticado() {
+        if (clientes.isEmpty()) {
+            return null;
+        }
+        return null;
+    }
+
+    // Método de consulta de disponibilidad de una clase
+
+    public boolean consultarDisponibilidadClase(String codigoClase) throws Exception {
+        if (codigoClase == null) {
+            throw new Exception("El código de la clase no puede ser nulo.");
+        }
+
+        Clase clase = buscarClasePorCodigo(codigoClase);
+        if (clase == null) {
+            throw new Exception("No se encontró una clase con el código " + codigoClase + ".");
+        }
+
+        return clase.isDisponible();
+    }
 
 }

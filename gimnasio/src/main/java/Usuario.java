@@ -7,9 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-
-
 public class Usuario {
 
     private String nombre, identificacion;
+
 }

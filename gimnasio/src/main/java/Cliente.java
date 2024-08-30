@@ -1,29 +1,38 @@
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Getter
 @Setter
-@Builder
+public class Cliente extends  Usuario{
+    private String direccion;
+    private String correo;
+    private String telefono;
+    private String contrasena;
+    private List<Entrenamiento> historialEntrenamientos;
 
-public class Cliente extends Usuario{
-
-    private String direccion, password, telefono, correo;
-    private List<Entrenamiento> entrenamientos;
-
-    public Cliente(String nombre, String identificacion, String direccion, String password, String correo, String telefono) {
+    public Cliente(String identificacion, String nombre, String direccion, String correo, String telefono, String contrasena) {
         super(nombre, identificacion);
         this.direccion = direccion;
-        this.password = password;
         this.correo = correo;
+        this.contrasena = contrasena;
         this.telefono = telefono;
+        this.historialEntrenamientos = new ArrayList<>();
     }
 
-    public Arrays getHistorialEntrenamientos() {
-        return null;
+
+    public int caloriasTotalesQuemadas() {
+        int totalCalorias = 0;
+        for (Entrenamiento entrenamiento : historialEntrenamientos) {
+            totalCalorias += entrenamiento.getCaloriasQuemadas();
+        }
+        return totalCalorias;
+    }
+
+    public boolean estaInscritoEn(Clase clase) {
+        // Implementar la lógica para verificar si el cliente está inscrito en la clase
+        return false;
     }
 }
