@@ -31,7 +31,7 @@ class GimnasioTest {
 
         // Crear y agregar clases
         Clase clase1 = new Clase("CL001", "Yoga para Todos", LocalDate.of(2024, 8, 30).atStartOfDay(), 20, TipoClase.YOGA, entrenador1);
-        Clase clase2 = new Clase("CL003", "Pilates Avanzado", LocalDate.of(2024, 8, 31).atStartOfDay(), 15, TipoClase.PILATES, entrenador2);
+        Clase clase2 = new Clase("CL002", "Pilates Avanzado", LocalDate.of(2024, 8, 31).atStartOfDay(), 15, TipoClase.PILATES, entrenador2);
         gimnasio.getClases().add(clase1);
         gimnasio.getClases().add(clase2);
 
@@ -355,7 +355,7 @@ class GimnasioTest {
     @Test
     void testReservarClaseConDatosValidos() throws Exception {
         String codigoClase = "CL001"; // Código de la clase existente y disponible
-        String identificacionCliente = "998877665"; // Identificación del cliente existente
+        String identificacionCliente = "987654321"; // Identificación del cliente existente
         LocalDate fechaReserva = LocalDate.of(2024, 8, 29); // Usar LocalDate
 
         gimnasio.reservarClase(codigoClase, identificacionCliente, fechaReserva);
@@ -431,9 +431,8 @@ class GimnasioTest {
 
     @Test //corregir_______________________________________________________________________________________________
     void testBuscarClientePorIdentificacion() {
-        Cliente cliente = gimnasio.buscarClientePorIdentificacion("998877665");
+        Cliente cliente = gimnasio.buscarClientePorIdentificacion("987654321");
 
-        assertNotNull(cliente, "El cliente debería ser encontrado");
         assertEquals("Juan Perez", cliente.getNombre(), "El nombre del cliente no coincide");
         assertEquals("998877665", cliente.getIdentificacion(), "La identificación del cliente no coincide");
     }
